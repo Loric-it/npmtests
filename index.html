@@ -1,0 +1,31 @@
+<!-- Script js ici pour afficher le contenu du fichier data -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lignes du Fichier</title>
+</head>
+<body>
+  <h1>Contenu du Fichier</h1>
+  <ul id="fileContent">
+    <!-- Les lignes du fichier seront insérées ici -->
+  </ul>
+  <script>
+    // Fonction pour récupérer les lignes du fichier
+    async function fetchLines() {
+      const response = await fetch('/api/data');
+      const lines = await response.json();
+      const list = document.getElementById('fileContent');
+      lines.forEach(line => {
+        const listItem = document.createElement('li');
+        listItem.textContent = line;
+        list.appendChild(listItem);
+      });
+    }
+
+    // Charger les lignes au chargement de la page
+    window.onload = fetchLines;
+  </script>
+</body>
+</html>
